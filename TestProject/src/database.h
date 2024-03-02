@@ -9,6 +9,7 @@ class Database
 public:
     Database();
     void insertCountry(const std::string &country);
+    bool connected = true;
 private:
     PGconn * connection;
 };
