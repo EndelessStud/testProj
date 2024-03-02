@@ -43,10 +43,14 @@ void Subscriber::connection_lost(const string &cause)
 
 void Subscriber::message_arrived(mqtt::const_message_ptr msg)
 {
-     try{
-     db.insertCountry(Parser::getCountry(msg->get_payload_str()));
-    } catch (std::exception& e) {
-        cout << e.what() << endl;
+     try {
+    if (db.connected){
+      db.insertCountry(Parser::getCountry(msg->get_payload_str()));
     }
+    else
+       cerr << "Database status is not connected" << endl;
+  } catch (std::exception &e) {
+    cerr << e.what() << endl;
+  }
 }
 
