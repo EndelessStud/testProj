@@ -7,6 +7,7 @@ Database::Database() {
     std::cerr << "Connection to database failed: " << PQerrorMessage(connection)
               << std::endl;
     PQfinish(connection);
+    connected = false;
   }
 }
 
